@@ -1,0 +1,95 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+    font-family: 'Pixelify Sans', sans-serif;
+}
+
+#map {
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+
+.overlay-panel {
+    position: absolute;
+    background: linear-gradient(360deg, #42A5F5 0%, #F8F8F8 50%, #42A5F5 100%);
+    border: 8px solid #303030;
+    border-radius: 10px;
+    box-shadow: 0px 4px 4px rgba(0,0,0,0.25);
+    z-index: 10;
+    padding: 20px;
+}
+
+.pixelify-sans {
+    font-family: "Pixelify Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+}
+
+.info-panel {
+    margin-top: 30px;
+    background: #F8F8F8;
+    border: 5px solid #000;
+    padding: 15px;
+    color: #505058;
+}
+
+.action-panel {
+    margin-top: 20px;
+    background: #F8F8F8;
+    padding: 10px;
+}
+
+.pixel-button {
+    width: 110px;
+    height: 40px;
+    border: 3px solid #303030;
+    color: #F8F0E0;
+    font-size: 16px;
+    font-family: 'Pixelify Sans', sans-serif;
+    text-align: center;
+    text-shadow: 0px 1px 0px #303030;
+    box-shadow: inset -1px -1px 0px #fff;
+    cursor: pointer;
+    display: inline-block;
+    line-height: 40px;
+    padding: 0;
+}
+
+.pixel-button.pink {
+    background: linear-gradient(180deg, #F8A8B0 45%, #926368 100%);
+}
+
+.pixel-button.orange {
+    background: linear-gradient(180deg, #E09828 45%, #886838 100%);
+}
+
+.pixel-button.green {
+    background: linear-gradient(180deg, #58B028 35%, #254A11 100%);
+}
+
+.pixel-button.blue {
+    background: linear-gradient(180deg, #2890C8 35%, #405870 100%);
+}
+
+.pixel-box {
+    background: #f8f8f8;
+    padding: 20px;
+    color: #505058;
+    font-family: 'Pixelify Sans', sans-serif;
+    font-size: 16px;
+    text-shadow: 0px 1px 0px #A0A0A8;
+    width: 100%;
+    max-width: 400px;
+
+    /* Simulate pixelated borders */
+    border: 4px solid #606068;
+    box-shadow:
+        0 0 0 4px #F8D868,     /* gold outer frame */
+        0 0 0 8px #303030;     /* thick black border behind */
+}
