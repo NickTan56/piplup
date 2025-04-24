@@ -71,7 +71,7 @@ class PagesController extends AppController
         }
     }
 
-    public function newmenu()
+    public function newMenu()
     {
         $this->set('title', 'New Menu');
         $this->render('/Pages/newmenu');

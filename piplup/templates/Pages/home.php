@@ -1,3 +1,4 @@
+<!-- Piplup Header -->
 <div class="d-flex flex-wrap justify-content-start align-items-center">
     <?= $this->Html->image('piplup.png', [
         'class' => 'mb-3',
@@ -17,8 +18,8 @@
     <!-- Right buttons -->
     <div class="col-auto d-flex flex-column gap-2">
         <div class="d-flex gap-2">
-            <?= $this->Html->link('Filter', '/newmenu', ['class' => 'pixel-button pink']) ?>
-            <?= $this->Html->link('New', '/newmenu', ['class' => 'pixel-button orange']) ?>
+            <button type="button" class="pixel-button pink">Filter</button>
+            <?= $this->Html->link('New', '/new-menu', ['class' => 'pixel-button orange']) ?>
         </div>
         <div class="d-flex gap-2">
             <button type="button" class="pixel-button green">Search</button>
