@@ -18,6 +18,7 @@ $cakeDescription = 'Piplup Places';
     <?= $this->Html->meta(['rel' => 'preconnect', 'href' => 'https://fonts.googleapis.com']) ?>
     <?= $this->Html->meta(['rel' => 'preconnect', 'href' => 'https://fonts.gstatic.com', 'crossorigin' => 'anonymous']) ?>
     <?= $this->Html->css('https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css') ?>
+    <?= $this->Html->css('https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css') ?>
 </head>
 <body class="pixelify-sans">
 

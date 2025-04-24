@@ -4,47 +4,71 @@
  * @var iterable<\App\Model\Entity\Place> $places
  */
 ?>
-<div class="places index content">
-    <?= $this->Html->link(__('New Place'), ['action' => 'add'], ['class' => 'button float-right']) ?>
-    <h3><?= __('Places') ?></h3>
-    <div class="table-responsive">
-        <table>
-            <thead>
-                <tr>
-                    <th><?= $this->Paginator->sort('id') ?></th>
-                    <th><?= $this->Paginator->sort('subcategory_id') ?></th>
-                    <th><?= $this->Paginator->sort('name') ?></th>
-                    <th><?= $this->Paginator->sort('created') ?></th>
-                    <th><?= $this->Paginator->sort('modified') ?></th>
-                    <th class="actions"><?= __('Actions') ?></th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($places as $place): ?>
-                <tr>
-                    <td><?= $this->Number->format($place->id) ?></td>
-                    <td><?= $place->hasValue('subcategory') ? $this->Html->link($place->subcategory->name, ['controller' => 'Subcategories', 'action' => 'view', $place->subcategory->id]) : '' ?></td>
-                    <td><?= h($place->name) ?></td>
-                    <td><?= h($place->created) ?></td>
-                    <td><?= h($place->modified) ?></td>
-                    <td class="actions">
-                        <?= $this->Html->link(__('View'), ['action' => 'view', $place->id]) ?>
-                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $place->id]) ?>
-                        <?= $this->Form->postLink(
-                            __('Delete'),
-                            ['action' => 'delete', $place->id],
-                            [
-                                'method' => 'delete',
-                                'confirm' => __('Are you sure you want to delete # {0}?', $place->id),
-                            ]
-                        ) ?>
-                    </td>
-                </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
+<!-- Piplup Header -->
+<div class="d-flex flex-wrap justify-content-start align-items-center">
+    <?= $this->Html->image('piplup.png', [
+        'class' => 'mb-3',
+        'style' => 'width:113px; height:113px;',
+        'alt' => 'Piplup'
+    ]) ?>
+    <h1 class="h3 mb-3 heading-title">Piplup Places</h1>
+</div>
+
+<!-- Top Action Panel -->
+<div class="row g-3 align-items-center">
+    <!-- Left box -->
+    <div class="col-auto">
+        <div class="pixel-box">
+            <strong>What will you do?</strong>
+        </div>
     </div>
-    <div class="paginator">
+
+    <!-- Right buttons -->
+    <div class="col-auto d-flex flex-column gap-2">
+        <div class="d-flex gap-2">
+            <button type="button" class="pixel-button pink">Filter</button>
+            <?= $this->Html->link('New', ['action' => 'add'], ['class' => 'pixel-button orange']) ?>
+        </div>
+        <div class="d-flex gap-2">
+            <button type="button" class="pixel-button green">Search</button>
+            <button type="button" class="pixel-button blue">Direction</button>
+        </div>
+    </div>
+</div>
+
+<!-- Place List Section -->
+<div class="info-panel bg-light border border-dark p-3 text-dark mt-4">
+    <div class="place-list">
+        <div class="d-flex fw-bold border-bottom pb-2 mb-2" style="font-family: 'Pixelify Sans';">
+            <div class="flex-fill">Category</div>
+            <div class="flex-fill">Subcategory</div>
+            <div class="flex-fill">Name</div>
+            <div class="flex-fill">Address</div>
+        </div>
+
+        <?php foreach ($places as $place): ?>
+            <div class="d-flex border-bottom py-2" style="font-family: 'Pixelify Sans';">
+                <div class="flex-fill"><?= h($place->subcategory->category->name ?? '') ?></div>
+                <div class="flex-fill"><?= h($place->subcategory->name ?? '') ?></div>
+                <div class="flex-fill"><?= h($place->name) ?></div>
+                <div class="flex-fill">
+                    <a href="https://www.google.com/maps/dir/?api=1&destination=<?= urlencode($place->address) ?>" target="_blank" rel="noopener">
+                        <?= $this->Html->link('<i class="bi bi-sign-turn-right-fill"></i>', 
+                            "https://www.google.com/maps/dir/?api=1&destination=" . urlencode($place->address), [
+                            'escape' => false,
+                            'target' => '_blank',
+                            'rel' => 'noopener',
+                            'title' => 'Open in Google Maps'
+                        ]) ?>
+                    </a>
+                </div>
+            </div>
+        <?php endforeach; ?>
+
+    </div>
+
+    <!-- Paginator -->
+    <div class="paginator mt-4">
         <ul class="pagination">
             <?= $this->Paginator->first('<< ' . __('first')) ?>
             <?= $this->Paginator->prev('< ' . __('previous')) ?>
