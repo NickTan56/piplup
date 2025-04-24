@@ -1,12 +1,12 @@
 <div class="overlay-panel m-5">
-    <?= $this->Html->image('piplup.png', [
-        'class' => 'mb-3',
-        'style' => 'width:113px; height:113px;',
-        'alt' => 'Piplup'
-    ]) ?>
-
-    <h1 class="h3 mb-3">Piplup Places</h1>
-
+    <div class="d-flex flex-wrap mb-4 justify-content-start align-items-center">
+        <?= $this->Html->image('piplup.png', [
+            'class' => 'mb-3',
+            'style' => 'width:113px; height:113px;',
+            'alt' => 'Piplup'
+        ]) ?>
+        <h1 class="h3 mb-3">Piplup Places</h1>
+    </div>
     <div class="pixel-box mb-4">
         <strong>What will you do?</strong>
     </div>
