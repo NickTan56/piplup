@@ -2,7 +2,7 @@
 /**
  * @var \App\View\AppView $this
  */
-$cakeDescription = 'GIS Map Project';
+$cakeDescription = 'Piplup Places';
 ?>
 <!DOCTYPE html>
 <html lang="en">

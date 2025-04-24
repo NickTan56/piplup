@@ -70,4 +70,10 @@ class PagesController extends AppController
             throw new NotFoundException();
         }
     }
+
+    public function newmenu()
+    {
+        $this->set('title', 'New Menu');
+        $this->render('/Pages/newmenu');
+    }
 }
