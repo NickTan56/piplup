@@ -27,11 +27,11 @@
     <div class="col-auto d-flex flex-column gap-2">
         <div class="d-flex gap-2">
             <button type="button" class="pixel-button pink">Filter</button>
-            <?= $this->Html->link('New', ['action' => 'add'], ['class' => 'pixel-button orange']) ?>
+            <?= $this->Html->link('New', '/new-menu', ['class' => 'pixel-button orange']) ?>
         </div>
         <div class="d-flex gap-2">
             <button type="button" class="pixel-button green">Search</button>
-            <button type="button" class="pixel-button blue">Direction</button>
+            <button type="button" class="pixel-button blue">List</button>
         </div>
     </div>
 </div>
