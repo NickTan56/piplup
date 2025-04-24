@@ -1,5 +1,5 @@
 <!-- Back Button -->
-<?= $this->Html->link('Back', $this->request->referer(), ['class' => 'px-1 pt-1', 'escape' => false]) ?>
+<?= $this->Html->link('Back', '/', ['class' => 'px-1 pt-1', 'escape' => false]) ?>
 <!-- Piplup Header -->
 <div class="d-flex flex-wrap justify-content-start align-items-center">
     <?= $this->Html->image('piplup.png', [
