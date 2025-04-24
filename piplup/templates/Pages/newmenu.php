@@ -20,11 +20,11 @@
     <!-- Right buttons -->
     <div class="col-auto d-flex flex-column gap-2">
         <div class="d-flex gap-2">
-            <?= $this->Html->link('Place', '/new-menu', ['class' => 'pixel-button orange']) ?>
-            <button type="button" class="pixel-button green">Category</button>
+            <?= $this->Html->link('Place', ['controller' => 'Places', 'action' => 'add'], ['class' => 'pixel-button orange']) ?>
+            <?= $this->Html->link('Category', ['controller' => 'Categories', 'action' => 'add'], ['class' => 'pixel-button green']) ?>
         </div>
         <div class="d-flex gap-2">
-            <button type="button" class="pixel-button blue">Subcat</button>
+            <?= $this->Html->link('Subcat', ['controller' => 'Subcategories', 'action' => 'add'], ['class' => 'pixel-button blue']) ?>
         </div>
     </div>
 </div>
