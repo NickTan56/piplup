@@ -18,7 +18,7 @@ class PlacesController extends AppController
     public function index()
     {
         $query = $this->Places->find()
-            ->contain(['Subcategories']);
+            ->contain(['Subcategories' => ['Categories']]);
         $places = $this->paginate($query);
 
         $this->set(compact('places'));
