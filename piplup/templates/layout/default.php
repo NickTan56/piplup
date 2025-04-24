@@ -22,8 +22,9 @@ $cakeDescription = 'GIS Map Project';
 <body class="pixelify-sans">
 
     <div id="map"></div>
-
-    <?= $this->fetch('content') ?>
+    <div class="overlay-panel m-5">
+        <?= $this->fetch('content') ?>
+    </div>
 
     <?= $this->Html->script('https://unpkg.com/leaflet/dist/leaflet.js') ?>
     <?= $this->Html->script('map') ?>
