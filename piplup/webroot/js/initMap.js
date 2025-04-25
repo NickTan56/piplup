@@ -20,7 +20,8 @@ function initializeMap() {
                 featureType: "transit.station",
                 stylers: [{ visibility: "off" }]
             }
-        ]
+        ],
+        disableDefaultUI: true
     });
 
     const geocoder = new google.maps.Geocoder();
