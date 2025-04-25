@@ -118,3 +118,14 @@ html, body {
     color: red !important;
     font-size: large !important;
 }
+
+.clickable-row {
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+    background: #ffffff;
+}
+
+.clickable-row:hover {
+    outline: 2px solid #303030;
+    box-shadow: inset -2px -2px 0 #fff, inset 2px 2px 0 #000;
+}

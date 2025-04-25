@@ -1,84 +1,72 @@
 window.initMap = initializeMap;
 
+let markers = []; // To store all markers with info windows by index
+
 function initializeMap() {
-    // Initialize the map centered at a default location
-    const defaultLocation = { lat: -37.814, lng: 144.96332 }; // Example: Melbourne CBD
+    const defaultLocation = { lat: -37.814, lng: 144.96332 };
+
     const map = new google.maps.Map(document.getElementById("map"), {
         center: defaultLocation,
         zoom: 13,
+        disableDefaultUI: true,
         styles: [
-            {
-                featureType: "poi",
-                elementType: "labels",
-                stylers: [{ visibility: "off" }]
-            },
-            {
-                featureType: "poi.business",
-                stylers: [{ visibility: "off" }]
-            },
-            {
-                featureType: "transit.station",
-                stylers: [{ visibility: "off" }]
-            }
-        ],
-        disableDefaultUI: true
+            { featureType: "poi", elementType: "labels", stylers: [{ visibility: "off" }] },
+            { featureType: "poi.business", stylers: [{ visibility: "off" }] },
+            { featureType: "transit.station", stylers: [{ visibility: "off" }] }
+        ]
     });
 
     const geocoder = new google.maps.Geocoder();
 
-    // Add pins for all places by geocoding their addresses
     if (Array.isArray(allPlaces)) {
-        allPlaces.forEach(place => {
+        allPlaces.forEach((place, index) => {
             if (place.address) {
-                geocodeAddress(
-                    geocoder,
-                    map,
-                    place.address,
-                    place.category,
-                    place.subcategory,
-                    place.name,
-                    place.description
-                );
+                geocoder.geocode({ address: place.address }, (results, status) => {
+                    if (status === "OK") {
+                        const position = results[0].geometry.location;
+
+                        const marker = new google.maps.Marker({
+                            position: position,
+                            map: map,
+                            title: place.name,
+                            icon: {
+                                url: 'img/piplup.png',
+                                scaledSize: new google.maps.Size(50, 50),
+                                origin: new google.maps.Point(0, 0),
+                                anchor: new google.maps.Point(20, 40)
+                            }
+                        });
+
+                        const infoWindow = new google.maps.InfoWindow({
+                            content: `
+                                <strong>Category:</strong> ${place.category}<br>
+                                <strong>Subcategory:</strong> ${place.subcategory}<br>
+                                <strong>Name:</strong> ${place.name}<br>
+                                <strong>Description:</strong> ${place.description}
+                            `,
+                        });
+
+                        marker.addListener("click", () => {
+                            infoWindow.open(map, marker);
+                        });
+
+                        // Save both marker and its infoWindow
+                        markers[index] = { marker, infoWindow, position };
+
+                        // Hook list row click if it exists
+                        const row = document.querySelector(`tr[data-index="${index}"]`);
+                        if (row) {
+                            row.addEventListener("click", () => {
+                                map.panTo(position);
+                                map.setZoom(15);
+                                infoWindow.open(map, marker);
+                            });
+                        }
+                    } else {
+                        console.error(`Geocode failed for: ${place.address} — ${status}`);
+                    }
+                });
             }
         });
     }
-}
-
-// Function to geocode an address and create a pin
-function geocodeAddress(geocoder, map, address, category, subcategory, name, description) {
-    geocoder.geocode({ address: address }, (results, status) => {
-        if (status === "OK") {
-            const position = results[0].geometry.location;
-            createPin(map, position, category, subcategory, name, description);
-        } else {
-            console.error(`Geocode was not successful for the following reason: ${status}`);
-        }
-    });
-}
-
-function createPin(map, position, category, subcategory, name, description) {
-    const marker = new google.maps.Marker({
-        position: position,
-        map: map,
-        title: name,
-        icon: {
-            url: 'img/piplup.png', // adjust this path to your actual image location
-            scaledSize: new google.maps.Size(50, 50), // resize the icon as needed
-            origin: new google.maps.Point(0, 0),
-            anchor: new google.maps.Point(20, 40) // center-bottom anchor
-        }
-    });
-
-    const infoWindow = new google.maps.InfoWindow({
-        content: `
-            <strong>Category:</strong> ${category}<br>
-            <strong>Subcategory:</strong> ${subcategory}<br>
-            <strong>Name:</strong> ${name}<br>
-            <strong>Description:</strong> ${description}
-        `,
-    });
-
-    marker.addListener("click", () => {
-        infoWindow.open(map, marker);
-    });
 }

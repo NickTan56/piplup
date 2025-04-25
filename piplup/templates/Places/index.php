@@ -51,8 +51,8 @@
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($places as $place): ?>
-                    <tr class="border-bottom py-2">
+                <?php foreach ($places as $index => $place): ?>
+                    <tr class="border-bottom py-2 clickable-row" data-index="<?= $index ?>">
                         <td><?= h($place->subcategory->category->name ?? '') ?></td>
                         <td><?= h($place->subcategory->name ?? '') ?></td>
                         <td><?= h($place->name) ?></td>
