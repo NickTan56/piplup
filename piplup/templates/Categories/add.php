@@ -19,10 +19,12 @@
     <div class="categories form content">
         <?= $this->Form->create($category) ?>
         <fieldset>
+            <label for="name" class="form-label">Category Name <span class="required-asterisk">*</span></label>
             <?= $this->Form->control('name', [
-                'label' => 'Category Name',
+                'label' => false,
                 'class' => 'form-control pixel-input mt-2 mb-4',
-                'style' => 'max-width: 400px;',
+                'required' => true,
+                'id' => 'name',
             ]) ?>
         </fieldset>
         <?= $this->Form->button('Submit') ?>
