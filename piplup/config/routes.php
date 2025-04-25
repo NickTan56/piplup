@@ -94,4 +94,5 @@ return function (RouteBuilder $routes): void {
      * ```
      */
     $routes->connect('/new-menu', ['controller' => 'Pages', 'action' => 'newMenu']);
+    $routes->connect('/list-menu', ['controller' => 'Pages', 'action' => 'listMenu']);
 };

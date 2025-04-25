@@ -44,7 +44,7 @@
                             <li><?= $this->Html->link('Name (Z-A)', ['?' => ['sort' => 'name', 'direction' => 'desc']], ['class' => 'dropdown-item']) ?></li>
                         </ul>
                     </div>
-                    <button type="button" class="pixel-button blue">List</button>
+                    <?= $this->Html->link('List', '/list-menu', ['class' => 'pixel-button blue']) ?>
                 </div>
             </div>
         </div>

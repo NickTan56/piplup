@@ -76,4 +76,10 @@ class PagesController extends AppController
         $this->set('title', 'New Menu');
         $this->render('/Pages/newmenu');
     }
+
+    public function listMenu()
+    {
+        $this->set('title', 'List Menu');
+        $this->render('/Pages/listmenu');
+    }
 }
