@@ -27,7 +27,9 @@
                 'id' => 'name',
             ]) ?>
         </fieldset>
-        <?= $this->Form->button('Submit') ?>
+        <div class="d-flex justify-content-end">
+            <?= $this->Form->button('Submit') ?>
+        </div>
         <?= $this->Form->end() ?>
     </div>
 </div>
