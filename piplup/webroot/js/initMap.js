@@ -40,12 +40,17 @@ function geocodeAddress(geocoder, map, address, category, subcategory, name, des
     });
 }
 
-// Function to create a new pin with a popup info window
 function createPin(map, position, category, subcategory, name, description) {
     const marker = new google.maps.Marker({
         position: position,
         map: map,
         title: name,
+        icon: {
+            url: 'img/piplup.png', // adjust this path to your actual image location
+            scaledSize: new google.maps.Size(50, 50), // resize the icon as needed
+            origin: new google.maps.Point(0, 0),
+            anchor: new google.maps.Point(20, 40) // center-bottom anchor
+        }
     });
 
     const infoWindow = new google.maps.InfoWindow({
