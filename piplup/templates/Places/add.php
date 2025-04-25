@@ -22,46 +22,47 @@
     <div class="places form content">
         <?= $this->Form->create($place) ?>
         <fieldset>
-            <!-- Subcategory -->
-            <label for="subcategory-id" class="form-label">Subcategory <span class="required-asterisk">*</span></label>
+            <!-- Category Dropdown -->
+            <label for="category_id" class="form-label">Category <span class="required-asterisk">*</span></label>
+            <?= $this->Form->control('category_id', [
+                'label' => false,
+                'options' => $categories,
+                'value' => $categoryId,
+                'empty' => 'Select a category',
+                'class' => 'form-control pixel-input',
+                'onchange' => 'this.form.submit()' // Re-submit the form when category changes
+            ]) ?>
+
+            <!-- Subcategory Dropdown -->
+            <label for="subcategory_id" class="form-label mt-3">Subcategory <span class="required-asterisk">*</span></label>
             <?= $this->Form->control('subcategory_id', [
                 'label' => false,
                 'options' => $subcategories,
-                'class' => 'form-control pixel-input mt-2 mb-4',
-                'required' => true,
-                'id' => 'subcategory-id'
+                'empty' => 'Choose a subcategory',
+                'class' => 'form-control pixel-input',
             ]) ?>
 
             <!-- Name -->
-            <label for="place-name" class="form-label">Place Name <span class="required-asterisk">*</span></label>
             <?= $this->Form->control('name', [
-                'label' => false,
-                'class' => 'form-control pixel-input mt-2 mb-4',
-                'required' => true,
-                'id' => 'place-name'
+                'label' => 'Place Name',
+                'class' => 'form-control pixel-input mt-3'
             ]) ?>
 
             <!-- Address -->
-            <label for="autocomplete" class="form-label">Address <span class="required-asterisk">*</span></label>
             <?= $this->Form->control('address', [
-                'label' => false,
+                'label' => 'Address',
                 'id' => 'autocomplete',
-                'type' => 'text',
-                'placeholder' => 'Enter an address',
-                'class' => 'form-control pixel-input mt-2 mb-4',
-                'required' => true
+                'class' => 'form-control pixel-input mt-3'
             ]) ?>
 
             <!-- Description -->
-            <label for="place-description" class="form-label">Description</label>
             <?= $this->Form->control('description', [
-                'label' => false,
-                'id' => 'place-description',
-                'class' => 'form-control pixel-input mt-2 mb-4'
+                'label' => 'Description',
+                'class' => 'form-control pixel-input mt-3'
             ]) ?>
         </fieldset>
 
-        <div class="d-flex justify-content-end">
+        <div class="d-flex justify-content-end mt-4">
             <?= $this->Form->button('Submit') ?>
         </div>
         <?= $this->Form->end() ?>

@@ -63,17 +63,27 @@ class PlacesController extends AppController
     public function add()
     {
         $place = $this->Places->newEmptyEntity();
+        $categoryId = $this->request->getData('category_id') ?? null;
+    
         if ($this->request->is('post')) {
             $place = $this->Places->patchEntity($place, $this->request->getData());
             if ($this->Places->save($place)) {
                 $this->Flash->success(__('The place has been saved.'));
-
                 return $this->redirect(['action' => 'index']);
             }
             $this->Flash->error(__('The place could not be saved. Please, try again.'));
         }
-        $subcategories = $this->Places->Subcategories->find('list', limit: 200)->all();
-        $this->set(compact('place', 'subcategories'));
+    
+        $categories = $this->Places->Subcategories->Categories->find('list')->toArray();
+        $subcategories = [];
+    
+        if ($categoryId) {
+            $subcategories = $this->Places->Subcategories->find('list')
+                ->where(['category_id' => $categoryId])
+                ->toArray();
+        }
+    
+        $this->set(compact('place', 'categories', 'subcategories', 'categoryId'));
     }
 
     /**
