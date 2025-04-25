@@ -24,7 +24,7 @@
                 <?php
                     echo $this->Form->control('subcategory_id', ['options' => $subcategories]);
                     echo $this->Form->control('name');
-                    echo $this->Form->control('address');
+                    echo $this->Form->control('address', ['id' => 'autocomplete', 'type' => 'text', 'placeholder' => 'Enter an address']);
                     echo $this->Form->control('description');
                 ?>
             </fieldset>

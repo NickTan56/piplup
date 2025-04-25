@@ -38,44 +38,37 @@
 
 <!-- Place List Section -->
 <div class="info-panel bg-light border border-dark p-3 text-dark mt-4">
-    <div class="place-list">
-        <div class="d-flex fw-bold border-bottom pb-2 mb-2" style="font-family: 'Pixelify Sans';">
-            <div class="flex-fill">Category</div>
-            <div class="flex-fill">Subcategory</div>
-            <div class="flex-fill">Name</div>
-            <div class="flex-fill">Address</div>
-        </div>
-
-        <?php foreach ($places as $place): ?>
-            <div class="d-flex border-bottom py-2" style="font-family: 'Pixelify Sans';">
-                <div class="flex-fill"><?= h($place->subcategory->category->name ?? '') ?></div>
-                <div class="flex-fill"><?= h($place->subcategory->name ?? '') ?></div>
-                <div class="flex-fill"><?= h($place->name) ?></div>
-                <div class="flex-fill">
-                    <a href="https://www.google.com/maps/dir/?api=1&destination=<?= urlencode($place->address) ?>" target="_blank" rel="noopener">
-                        <?= $this->Html->link('<i class="bi bi-sign-turn-right-fill"></i>', 
-                            "https://www.google.com/maps/dir/?api=1&destination=" . urlencode($place->address), [
-                            'escape' => false,
-                            'target' => '_blank',
-                            'rel' => 'noopener',
-                            'title' => 'Open in Google Maps'
-                        ]) ?>
-                    </a>
-                </div>
-            </div>
-        <?php endforeach; ?>
-
-    </div>
-
-    <!-- Paginator -->
-    <div class="paginator mt-4">
-        <ul class="pagination">
-            <?= $this->Paginator->first('<< ' . __('first')) ?>
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-            <?= $this->Paginator->last(__('last') . ' >>') ?>
-        </ul>
-        <p><?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?></p>
-    </div>
+    <table class="place-list table table-borderless" style="font-family: 'Pixelify Sans';">
+        <thead class="fw-bold border-bottom pb-2 mb-2">
+            <tr>
+                <th>Category</th>
+                <th>Subcategory</th>
+                <th>Name</th>
+                <th>Address</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($places as $place): ?>
+                <tr class="border-bottom py-2">
+                    <td><?= h($place->subcategory->category->name ?? '') ?></td>
+                    <td><?= h($place->subcategory->name ?? '') ?></td>
+                    <td><?= h($place->name) ?></td>
+                    <td>
+                        <a href="https://www.google.com/maps/dir/?api=1&destination=<?= urlencode($place->address) ?>" target="_blank" rel="noopener">
+                            <?= $this->Html->link('<i class="bi bi-sign-turn-right-fill"></i>', 
+                                "https://www.google.com/maps/dir/?api=1&destination=" . urlencode($place->address), [
+                                'escape' => false,
+                                'target' => '_blank',
+                                'rel' => 'noopener',
+                                'title' => 'Open in Google Maps'
+                            ]) ?>
+                        </a>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+    </table>
 </div>
+<script>
+    const allPlaces = <?= json_encode($allPlaces); ?>; // Pass places data to JavaScript
+</script>
