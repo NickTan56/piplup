@@ -59,22 +59,39 @@ html, body {
     line-height: 40px;
     padding: 0;
     text-decoration: none;
+    transition: background 0.2s ease-in-out;
 }
 
+/* PINK */
 .pixel-button.pink {
     background: linear-gradient(180deg, #F8A8B0 45%, #926368 100%);
 }
+.pixel-button.pink:hover {
+    background: linear-gradient(180deg, #e88a96 45%, #734a4e 100%);
+}
 
+/* ORANGE */
 .pixel-button.orange {
     background: linear-gradient(180deg, #E09828 45%, #886838 100%);
 }
+.pixel-button.orange:hover {
+    background: linear-gradient(180deg, #c07c18 45%, #6e522a 100%);
+}
 
+/* GREEN */
 .pixel-button.green {
     background: linear-gradient(180deg, #58B028 35%, #254A11 100%);
 }
+.pixel-button.green:hover {
+    background: linear-gradient(180deg, #3c801e 35%, #1a370c 100%);
+}
 
+/* BLUE */
 .pixel-button.blue {
     background: linear-gradient(180deg, #2890C8 35%, #405870 100%);
+}
+.pixel-button.blue:hover {
+    background: linear-gradient(180deg, #1f6ea0 35%, #2e425c 100%);
 }
 
 .pixel-box {
