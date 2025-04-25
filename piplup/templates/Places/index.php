@@ -32,18 +32,18 @@
                     <?= $this->Html->link('New', '/new-menu', ['class' => 'pixel-button orange']) ?>
                 </div>
                 <div class="d-flex gap-2">
-                    <div class="dropdown">
-                        <button class="pixel-button green" type="button" id="sortDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                            Sort
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="sortDropdown">
-                            <!-- <li><?= $this->Html->link('Category (A-Z)', ['?' => ['sort' => 'subcategory.category.name', 'direction' => 'asc']], ['class' => 'dropdown-item']) ?></li> -->
-                            <!-- <li><?= $this->Html->link('Subcategory (A-Z)', ['?' => ['sort' => 'subcategory.name', 'direction' => 'asc']], ['class' => 'dropdown-item']) ?></li> -->
-                            <li><?= $this->Html->link('Name (A-Z)', ['?' => ['sort' => 'name', 'direction' => 'asc']], ['class' => 'dropdown-item']) ?></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><?= $this->Html->link('Name (Z-A)', ['?' => ['sort' => 'name', 'direction' => 'desc']], ['class' => 'dropdown-item']) ?></li>
-                        </ul>
-                    </div>
+                        <div class="dropdown">
+                            <button class="pixel-button green" type="button" id="sortDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                Sort
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="sortDropdown">
+                                <li><?= $this->Html->link('Category (A-Z)', ['?' => ['sort' => 'Categories__name', 'direction' => 'asc']], ['class' => 'dropdown-item']) ?></li>
+                                <li><?= $this->Html->link('Subcategory (A-Z)', ['?' => ['sort' => 'Subcategories__name', 'direction' => 'asc']], ['class' => 'dropdown-item']) ?></li>
+                                <li><?= $this->Html->link('Name (A-Z)', ['?' => ['sort' => 'Places.name', 'direction' => 'asc']], ['class' => 'dropdown-item']) ?></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><?= $this->Html->link('Name (Z-A)', ['?' => ['sort' => 'Places.name', 'direction' => 'desc']], ['class' => 'dropdown-item']) ?></li>
+                            </ul>
+                        </div>
                     <?= $this->Html->link('List', '/list-menu', ['class' => 'pixel-button blue']) ?>
                 </div>
             </div>

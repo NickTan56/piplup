@@ -18,22 +18,29 @@ class PlacesController extends AppController
     public function index()
     {
         $query = $this->Places->find()
-            ->contain(['Subcategories' => ['Categories']]);
-        $places = $this->paginate($query);
-
-        // Fetch all places with category, subcategory, name, address, and description for the map
-        $allPlaces = array_map(function ($place) {
-            return [
-                'name' => $place->name,
-                'address' => $place->address,
-                'description' => $place->description,
-                'subcategory' => $place->subcategory->name ?? '', // Ensure subcategory is fetched
-                'category' => $place->subcategory->category->name ?? '' // Ensure category is fetched
-            ];
-        }, $query->toArray()); // Use the same query to ensure consistency
-
-        $this->set(compact('places', 'allPlaces'));
-    }
+            ->select([
+                'Places.id',
+                'Places.name',
+                'Places.address',
+                'Places.description',
+                'Subcategories__name' => 'Subcategories.name',
+                'Categories__name' => 'Categories.name',
+            ])
+            ->contain(['Subcategories' => ['Categories']])
+            ->leftJoinWith('Subcategories')
+            ->leftJoinWith('Subcategories.Categories')
+            ->enableAutoFields(true); // Keep all original fields
+    
+        $places = $this->paginate($query, [
+            'sortableFields' => [
+                'Places.name',
+                'Subcategories__name',
+                'Categories__name',
+            ]
+        ]);
+    
+        $this->set(compact('places'));
+    }    
 
     /**
      * View method
