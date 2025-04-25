@@ -37,8 +37,8 @@
                             Sort
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="sortDropdown">
-                            <li><?= $this->Html->link('Category (A-Z)', ['?' => ['sort' => 'subcategory.category.name', 'direction' => 'asc']], ['class' => 'dropdown-item']) ?></li>
-                            <li><?= $this->Html->link('Subcategory (A-Z)', ['?' => ['sort' => 'subcategory.name', 'direction' => 'asc']], ['class' => 'dropdown-item']) ?></li>
+                            <!-- <li><?= $this->Html->link('Category (A-Z)', ['?' => ['sort' => 'subcategory.category.name', 'direction' => 'asc']], ['class' => 'dropdown-item']) ?></li> -->
+                            <!-- <li><?= $this->Html->link('Subcategory (A-Z)', ['?' => ['sort' => 'subcategory.name', 'direction' => 'asc']], ['class' => 'dropdown-item']) ?></li> -->
                             <li><?= $this->Html->link('Name (A-Z)', ['?' => ['sort' => 'name', 'direction' => 'asc']], ['class' => 'dropdown-item']) ?></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><?= $this->Html->link('Name (Z-A)', ['?' => ['sort' => 'name', 'direction' => 'desc']], ['class' => 'dropdown-item']) ?></li>
@@ -55,9 +55,9 @@
         <table class="place-list table table-borderless">
             <thead class="fw-bold border-bottom pb-2 mb-2">
                 <tr>
-                    <th><?= $this->Paginator->sort('subcategory.category.name', 'Category') ?></th>
-                    <th><?= $this->Paginator->sort('subcategory.name', 'Subcategory') ?></th>
-                    <th><?= $this->Paginator->sort('name', 'Name') ?></th>
+                    <th>Category</th>
+                    <th>Subcategory</th>
+                    <th>Name</th>
                     <th>Direction</th>
                 </tr>
             </thead>
