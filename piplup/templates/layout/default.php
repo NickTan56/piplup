@@ -21,13 +21,22 @@ $cakeDescription = 'Piplup Places';
     <?= $this->Html->css('https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css') ?>
 </head>
 <body class="pixelify-sans">
-
+    <div class="map-container">
     <div id="map"></div>
-    <div class="overlay-panel m-5">
-        <?= $this->fetch('content') ?>
+        <div class="overlay-panel m-5">
+            <?= $this->fetch('content') ?>
+            <?= $this->Html->script('initMap') ?>
+        </div>
     </div>
-
-    <?= $this->Html->script('https://unpkg.com/leaflet/dist/leaflet.js') ?>
-    <?= $this->Html->script('map') ?>
+    <?php
+    $apiKeys = include CONFIG . 'api_keys.php'; // Load API keys from the configuration file
+    $googleApiKey = $apiKeys['google_maps_api_key'];
+    ?>
+    <?= $this->Html->script("https://maps.googleapis.com/maps/api/js?key={$googleApiKey}&callback=initMap", [
+        'async' => true,
+        'defer' => true
+    ]) ?>
 </body>
 </html>
+<?= $this->Html->script("https://maps.googleapis.com/maps/api/js?key={$googleApiKey}&libraries=places") ?>
+<?= $this->Html->script('initAutocomplete') ?>
