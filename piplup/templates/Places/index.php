@@ -32,7 +32,7 @@
                     <?= $this->Html->link('New', '/new-menu', ['class' => 'pixel-button orange']) ?>
                 </div>
                 <div class="d-flex gap-2">
-                    <button type="button" class="pixel-button green">Search</button>
+                    <button type="button" class="pixel-button green">Sort</button>
                     <button type="button" class="pixel-button blue">List</button>
                 </div>
             </div>
