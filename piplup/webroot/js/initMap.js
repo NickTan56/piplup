@@ -1,6 +1,7 @@
 window.initMap = initializeMap;
 
 let markers = []; // To store all markers with info windows by index
+let activeInfoWindow = null;
 
 function initializeMap() {
     const defaultLocation = { lat: -37.814, lng: 144.96332 };
@@ -47,8 +48,11 @@ function initializeMap() {
                         });
 
                         marker.addListener("click", () => {
+                            if (activeInfoWindow) activeInfoWindow.close();
                             infoWindow.open(map, marker);
+                            activeInfoWindow = infoWindow;
                         });
+                        
 
                         // Save both marker and its infoWindow
                         markers[index] = { marker, infoWindow, position };
@@ -57,11 +61,13 @@ function initializeMap() {
                         const row = document.querySelector(`tr[data-index="${index}"]`);
                         if (row) {
                             row.addEventListener("click", () => {
+                                if (activeInfoWindow) activeInfoWindow.close();
                                 map.setZoom(15);
                                 map.setCenter(position);
                                 map.panBy(-200, 0);
-                                infoWindow.open(map, marker);                                
-                            });
+                                infoWindow.open(map, marker);
+                                activeInfoWindow = infoWindow;
+                            });                            
                         }
                     } else {
                         console.error(`Geocode failed for: ${place.address} — ${status}`);
