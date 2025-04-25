@@ -57,9 +57,10 @@ function initializeMap() {
                         const row = document.querySelector(`tr[data-index="${index}"]`);
                         if (row) {
                             row.addEventListener("click", () => {
-                                map.panTo(position);
                                 map.setZoom(15);
-                                infoWindow.open(map, marker);
+                                map.setCenter(position);
+                                map.panBy(-200, 0);
+                                infoWindow.open(map, marker);                                
                             });
                         }
                     } else {
