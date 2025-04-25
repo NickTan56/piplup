@@ -13,61 +13,65 @@
     ]) ?>
     <h1 class="h3 mb-3 heading-title">Piplup Places</h1>
 </div>
+<div class="d-flex flex-column align-items-center">
+    <!-- Header with pixel box + buttons -->
+    <div class="d-flex flex-wrap justify-content-center align-items-start gap-4 mb-4">
+        <!-- Top Action Panel -->
+        <div class="row g-3 align-items-center">
+            <!-- Left box -->
+            <div class="col-auto">
+                <div class="pixel-box">
+                    <strong>What will you do?</strong>
+                </div>
+            </div>
 
-<!-- Top Action Panel -->
-<div class="row g-3 align-items-center">
-    <!-- Left box -->
-    <div class="col-auto">
-        <div class="pixel-box">
-            <strong>What will you do?</strong>
+            <!-- Right buttons -->
+            <div class="col-auto d-flex flex-column gap-2">
+                <div class="d-flex gap-2">
+                    <button type="button" class="pixel-button pink">Filter</button>
+                    <?= $this->Html->link('New', '/new-menu', ['class' => 'pixel-button orange']) ?>
+                </div>
+                <div class="d-flex gap-2">
+                    <button type="button" class="pixel-button green">Search</button>
+                    <button type="button" class="pixel-button blue">List</button>
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- Right buttons -->
-    <div class="col-auto d-flex flex-column gap-2">
-        <div class="d-flex gap-2">
-            <button type="button" class="pixel-button pink">Filter</button>
-            <?= $this->Html->link('New', '/new-menu', ['class' => 'pixel-button orange']) ?>
-        </div>
-        <div class="d-flex gap-2">
-            <button type="button" class="pixel-button green">Search</button>
-            <button type="button" class="pixel-button blue">List</button>
-        </div>
-    </div>
-</div>
-
-<!-- Place List Section -->
-<div class="info-panel bg-light border border-dark p-3 text-dark mt-4">
-    <table class="place-list table table-borderless" style="font-family: 'Pixelify Sans';">
-        <thead class="fw-bold border-bottom pb-2 mb-2">
-            <tr>
-                <th>Category</th>
-                <th>Subcategory</th>
-                <th>Name</th>
-                <th>Address</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($places as $place): ?>
-                <tr class="border-bottom py-2">
-                    <td><?= h($place->subcategory->category->name ?? '') ?></td>
-                    <td><?= h($place->subcategory->name ?? '') ?></td>
-                    <td><?= h($place->name) ?></td>
-                    <td>
-                        <a href="https://www.google.com/maps/dir/?api=1&destination=<?= urlencode($place->address) ?>" target="_blank" rel="noopener">
-                            <?= $this->Html->link('<i class="bi bi-sign-turn-right-fill"></i>', 
-                                "https://www.google.com/maps/dir/?api=1&destination=" . urlencode($place->address), [
-                                'escape' => false,
-                                'target' => '_blank',
-                                'rel' => 'noopener',
-                                'title' => 'Open in Google Maps'
-                            ]) ?>
-                        </a>
-                    </td>
+    <!-- Place List Section -->
+    <div class="info-panel bg-light border border-dark p-3 text-dark">
+        <table class="place-list table table-borderless">
+            <thead class="fw-bold border-bottom pb-2 mb-2">
+                <tr>
+                    <th>Category</th>
+                    <th>Subcategory</th>
+                    <th>Name</th>
+                    <th>Address</th>
                 </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                <?php foreach ($places as $place): ?>
+                    <tr class="border-bottom py-2">
+                        <td><?= h($place->subcategory->category->name ?? '') ?></td>
+                        <td><?= h($place->subcategory->name ?? '') ?></td>
+                        <td><?= h($place->name) ?></td>
+                        <td>
+                            <a href="https://www.google.com/maps/dir/?api=1&destination=<?= urlencode($place->address) ?>" target="_blank" rel="noopener">
+                                <?= $this->Html->link('<i class="bi bi-sign-turn-right-fill"></i>', 
+                                    "https://www.google.com/maps/dir/?api=1&destination=" . urlencode($place->address), [
+                                    'escape' => false,
+                                    'target' => '_blank',
+                                    'rel' => 'noopener',
+                                    'title' => 'Open in Google Maps'
+                                ]) ?>
+                            </a>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
 </div>
 <script>
     const allPlaces = <?= json_encode($allPlaces); ?>; // Pass places data to JavaScript
