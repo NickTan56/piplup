@@ -32,7 +32,18 @@
                     <?= $this->Html->link('New', '/new-menu', ['class' => 'pixel-button orange']) ?>
                 </div>
                 <div class="d-flex gap-2">
-                    <button type="button" class="pixel-button green">Sort</button>
+                    <div class="dropdown">
+                        <button class="pixel-button green" type="button" id="sortDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            Sort
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="sortDropdown">
+                            <li><?= $this->Html->link('Category (A-Z)', ['?' => ['sort' => 'subcategory.category.name', 'direction' => 'asc']], ['class' => 'dropdown-item']) ?></li>
+                            <li><?= $this->Html->link('Subcategory (A-Z)', ['?' => ['sort' => 'subcategory.name', 'direction' => 'asc']], ['class' => 'dropdown-item']) ?></li>
+                            <li><?= $this->Html->link('Name (A-Z)', ['?' => ['sort' => 'name', 'direction' => 'asc']], ['class' => 'dropdown-item']) ?></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><?= $this->Html->link('Name (Z-A)', ['?' => ['sort' => 'name', 'direction' => 'desc']], ['class' => 'dropdown-item']) ?></li>
+                        </ul>
+                    </div>
                     <button type="button" class="pixel-button blue">List</button>
                 </div>
             </div>
@@ -44,10 +55,10 @@
         <table class="place-list table table-borderless">
             <thead class="fw-bold border-bottom pb-2 mb-2">
                 <tr>
-                    <th>Category</th>
-                    <th>Subcategory</th>
-                    <th>Name</th>
-                    <th>Address</th>
+                    <th><?= $this->Paginator->sort('subcategory.category.name', 'Category') ?></th>
+                    <th><?= $this->Paginator->sort('subcategory.name', 'Subcategory') ?></th>
+                    <th><?= $this->Paginator->sort('name', 'Name') ?></th>
+                    <th>Direction</th>
                 </tr>
             </thead>
             <tbody>
@@ -76,3 +87,4 @@
 <script>
     const allPlaces = <?= json_encode($allPlaces); ?>; // Pass places data to JavaScript
 </script>
+<?= $this->Html->script('https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js') ?>
