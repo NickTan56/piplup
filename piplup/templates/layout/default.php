@@ -11,7 +11,7 @@ $cakeDescription = 'Piplup Places';
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title><?= $cakeDescription ?>: <?= $this->fetch('title') ?></title>
     <?= $this->Html->css('https://unpkg.com/leaflet/dist/leaflet.css') ?>
-    <?= $this->Html->meta('icon') ?>
+    <?= $this->Html->meta('icon', 'webroot/favicon.ico') ?>
     <?= $this->Html->css('custom') ?>
     <?= $this->fetch('css') ?>
     <?= $this->Html->css('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap', ['rel' => 'stylesheet']) ?>
