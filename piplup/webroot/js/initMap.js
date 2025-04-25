@@ -6,6 +6,21 @@ function initializeMap() {
     const map = new google.maps.Map(document.getElementById("map"), {
         center: defaultLocation,
         zoom: 13,
+        styles: [
+            {
+                featureType: "poi",
+                elementType: "labels",
+                stylers: [{ visibility: "off" }]
+            },
+            {
+                featureType: "poi.business",
+                stylers: [{ visibility: "off" }]
+            },
+            {
+                featureType: "transit.station",
+                stylers: [{ visibility: "off" }]
+            }
+        ]
     });
 
     const geocoder = new google.maps.Geocoder();
