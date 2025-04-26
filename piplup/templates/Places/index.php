@@ -28,67 +28,71 @@
             <!-- Right buttons -->
             <div class="col-auto d-flex flex-column gap-2">
                 <div class="d-flex gap-2">
-                <div class="dropdown">
-                    <button class="pixel-button pink" type="button" id="filterDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                        Filter
-                    </button>
-                    <div class="dropdown-menu p-3" aria-labelledby="filterDropdown" style="width: 400px;">
-                        <?= $this->Form->create(null, ['type' => 'get']) ?>
+                    <div class="dropdown">
+                        <!-- Filter Option -->
+                        <button class="pixel-button pink" type="button" id="filterDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            Filter
+                        </button>
+                        <div class="dropdown-menu p-3" aria-labelledby="filterDropdown" style="width: 400px;">
+                            <?= $this->Form->create(null, ['type' => 'get']) ?>
 
-                        <div class="row">
-                            <div class="col-6">
-                                <strong>Categories</strong>
-                                <?php foreach ($categories as $catId => $catName): ?>
-                                    <div class="form-check">
-                                        <?= $this->Form->checkbox('categories[]', [
-                                            'value' => $catId,
-                                            'id' => "category-$catId",
-                                            'checked' => in_array($catId, (array) $this->request->getQuery('categories')),
-                                            'hiddenField' => false
-                                        ]) ?>
-                                        <?= $this->Form->label("category-$catId", h($catName)) ?>
-                                    </div>
-                                <?php endforeach; ?>
+                            <div class="row">
+                                <div class="col-6">
+                                    <strong>Categories</strong>
+                                    <?php foreach ($categories as $catId => $catName): ?>
+                                        <div class="form-check">
+                                            <?= $this->Form->checkbox('categories[]', [
+                                                'value' => $catId,
+                                                'id' => "category-$catId",
+                                                'checked' => in_array($catId, (array) $this->request->getQuery('categories')),
+                                                'hiddenField' => false
+                                            ]) ?>
+                                            <?= $this->Form->label("category-$catId", h($catName)) ?>
+                                        </div>
+                                    <?php endforeach; ?>
+                                </div>
+
+                                <div class="col-6">
+                                    <strong>Subcategories</strong>
+                                    <?php foreach ($subcategories as $subcat): ?>
+                                        <div class="form-check subcategory-item" data-category="<?= h($subcat->category_id) ?>">
+                                            <?= $this->Form->checkbox('subcategories[]', [
+                                                'value' => $subcat->id,
+                                                'id' => "subcategory-$subcat->id",
+                                                'checked' => in_array($subcat->id, (array) $this->request->getQuery('subcategories')),
+                                                'hiddenField' => false
+                                            ]) ?>
+                                            <?= $this->Form->label("subcategory-$subcat->id", h($subcat->name)) ?>
+                                        </div>
+                                    <?php endforeach; ?>
+                                </div>
                             </div>
 
-                            <div class="col-6">
-                                <strong>Subcategories</strong>
-                                <?php foreach ($subcategories as $subcat): ?>
-                                    <div class="form-check subcategory-item" data-category="<?= h($subcat->category_id) ?>">
-                                        <?= $this->Form->checkbox('subcategories[]', [
-                                            'value' => $subcat->id,
-                                            'id' => "subcategory-$subcat->id",
-                                            'checked' => in_array($subcat->id, (array) $this->request->getQuery('subcategories')),
-                                            'hiddenField' => false
-                                        ]) ?>
-                                        <?= $this->Form->label("subcategory-$subcat->id", h($subcat->name)) ?>
-                                    </div>
-                                <?php endforeach; ?>
+                            <div class="text-center mt-3">
+                                <?= $this->Form->button('Apply Filter', ['class' => 'pixel-button green']) ?>
                             </div>
-                        </div>
 
-                        <div class="text-center mt-3">
-                            <?= $this->Form->button('Apply Filter', ['class' => 'pixel-button green']) ?>
+                            <?= $this->Form->end() ?>
                         </div>
-
-                        <?= $this->Form->end() ?>
                     </div>
-                </div>
+                    <!-- New Menu Option -->
                     <?= $this->Html->link('New', '/new-menu', ['class' => 'pixel-button orange']) ?>
                 </div>
                 <div class="d-flex gap-2">
-                        <div class="dropdown">
-                            <button class="pixel-button green" type="button" id="sortDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                                Sort
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="sortDropdown">
-                                <li><?= $this->Html->link('Category (A-Z)', ['?' => ['sort' => 'Categories__name', 'direction' => 'asc']], ['class' => 'dropdown-item']) ?></li>
-                                <li><?= $this->Html->link('Subcategory (A-Z)', ['?' => ['sort' => 'Subcategories__name', 'direction' => 'asc']], ['class' => 'dropdown-item']) ?></li>
-                                <li><?= $this->Html->link('Name (A-Z)', ['?' => ['sort' => 'Places.name', 'direction' => 'asc']], ['class' => 'dropdown-item']) ?></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><?= $this->Html->link('Name (Z-A)', ['?' => ['sort' => 'Places.name', 'direction' => 'desc']], ['class' => 'dropdown-item']) ?></li>
-                            </ul>
-                        </div>
+                    <!-- Sort Option -->
+                    <div class="dropdown">
+                        <button class="pixel-button green" type="button" id="sortDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                            Sort
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="sortDropdown">
+                            <li><?= $this->Html->link('Category (A-Z)', ['?' => ['sort' => 'Categories__name', 'direction' => 'asc']], ['class' => 'dropdown-item']) ?></li>
+                            <li><?= $this->Html->link('Subcategory (A-Z)', ['?' => ['sort' => 'Subcategories__name', 'direction' => 'asc']], ['class' => 'dropdown-item']) ?></li>
+                            <li><?= $this->Html->link('Name (A-Z)', ['?' => ['sort' => 'Places.name', 'direction' => 'asc']], ['class' => 'dropdown-item']) ?></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><?= $this->Html->link('Name (Z-A)', ['?' => ['sort' => 'Places.name', 'direction' => 'desc']], ['class' => 'dropdown-item']) ?></li>
+                        </ul>
+                    </div>
+                    <!-- List Menu Option -->
                     <?= $this->Html->link('List', '/list-menu', ['class' => 'pixel-button blue']) ?>
                 </div>
             </div>
