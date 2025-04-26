@@ -15,15 +15,22 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             subcategoryList.style.display = 'block';
             subcategoryPlaceholder.style.display = 'none';
-
-            subcategoryItems.forEach(item => {
-                if (selectedCategories.includes(item.getAttribute('data-category'))) {
-                    item.style.display = 'block';
-                } else {
-                    item.style.display = 'none';
-                }
-            });
         }
+
+        subcategoryItems.forEach(item => {
+            const subcategoryCheckbox = item.querySelector('input[type="checkbox"]');
+            const itemCategory = item.getAttribute('data-category');
+
+            if (selectedCategories.includes(itemCategory)) {
+                item.style.display = 'block';
+            } else {
+                item.style.display = 'none';
+                // Untick subcategories that no longer belong to any selected category
+                if (subcategoryCheckbox.checked) {
+                    subcategoryCheckbox.checked = false;
+                }
+            }
+        });
     }
 
     categoryCheckboxes.forEach(cb => {
