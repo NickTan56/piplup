@@ -136,3 +136,53 @@ html, body {
     80% { transform: scale(0.9); }
     100% { transform: scale(1); }
 }
+
+.custom-accordion-button {
+    font-size: 14px !important;
+    font-weight: normal !important;
+    background: white !important;
+    border: none !important;
+    border-radius: 0px !important;
+    width: 100% !important;
+    padding: 12px 8px !important;
+    text-align: left !important;
+    color: #303030 !important;
+    position: relative !important;
+    /* transition: border 0.3s ease; */
+    border-top: 1px solid #e0e0e0 !important;
+    border-bottom: 1px solid #e0e0e0 !important;
+    border-left: none !important;
+    border-right: none !important;
+}
+
+/* Remove Bootstrap default arrow */
+.custom-accordion-button::after {
+    display: none !important;
+}
+
+/* When hovering, add border */
+.custom-accordion-button:hover {
+    border: 2px solid #303030 !important;
+    border-radius: 0px !important;
+}
+
+/* Icon position */
+.custom-accordion-icon {
+    position: absolute !important;
+    right: 16px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    font-size: 12px !important;
+    transition: transform 0.3s ease !important;
+}
+
+/* Flip icon when expanded */
+.custom-accordion-button:not(.collapsed) .custom-accordion-icon {
+    transform: translateY(-50%) rotate(180deg) !important;
+}
+
+/* Remove focus border */
+.accordion-button:focus {
+    box-shadow: none !important;
+    outline: none !important;
+}

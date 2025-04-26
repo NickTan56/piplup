@@ -4,6 +4,8 @@
  * @var iterable<\App\Model\Entity\Subcategory> $subcategories
  */
 ?>
+
+<?= $this->Html->link('Back', '/', ['class' => 'px-1 pt-1', 'escape' => false]) ?>
 <!-- Piplup Header -->
 <div class="d-flex flex-wrap justify-content-start align-items-center">
     <?= $this->Html->image('piplup.png', [
@@ -16,15 +18,15 @@
 
 <div class="d-flex flex-column align-items-center">
     <!-- Top Action Buttons -->
-    <div class="d-flex flex-wrap justify-content-center align-items-start gap-4 mb-4">
+    <!-- <div class="d-flex flex-wrap justify-content-center align-items-start gap-4 mb-4">
         <div class="d-flex gap-2">
             <?= $this->Html->link('New', ['action' => 'add'], ['class' => 'pixel-button orange']) ?>
             <?= $this->Html->link('Back', ['controller' => 'Places', 'action' => 'index'], ['class' => 'pixel-button blue']) ?>
         </div>
-    </div>
+    </div> -->
 
     <!-- Subcategory List Section -->
-    <div class="info-panel border border-dark p-3 text-dark table-wrapper" style="max-height: 500px; overflow-y: auto; width:100%;">
+    <div class="info-panel border border-dark p-3 text-dark table-wrapper" style="max-height: 500px; overflow-y: auto; width: 100%;">
         <div class="accordion" id="subcategoryAccordion">
             <?php
             $currentCategory = null;
@@ -39,8 +41,9 @@
                     <!-- Accordion Item Start -->
                     <div class="accordion-item" style="background: none; border: none;">
                         <h2 class="accordion-header" id="heading<?= $rowIndex ?>">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<?= $rowIndex ?>" aria-expanded="false" aria-controls="collapse<?= $rowIndex ?>" style="font-family: 'Pixelify Sans'; font-size: 20px;">
+                            <button class="accordion-button custom-accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<?= $rowIndex ?>" aria-expanded="false" aria-controls="collapse<?= $rowIndex ?>">
                                 <?= h($categoryName) ?>
+                                <span class="custom-accordion-icon">▼</span>
                             </button>
                         </h2>
                         <div id="collapse<?= $rowIndex ?>" class="accordion-collapse collapse" aria-labelledby="heading<?= $rowIndex ?>" data-bs-parent="#subcategoryAccordion">
@@ -61,15 +64,15 @@
                     endif;
                     ?>
                     <!-- Subcategory Rows -->
-                    <tr>
+                    <tr class="border-bottom py-2">
                         <td><?= h($subcategory->name) ?></td>
                         <td><?= h($subcategory->created->format('n/j/y, g:iA')) ?></td>
                         <td><?= h($subcategory->modified->format('n/j/y, g:iA')) ?></td>
                         <td>
-                            <?= $this->Html->link('Edit', ['action' => 'edit', $subcategory->id], ['class' => 'link-light']) ?>
+                            <?= $this->Html->link('Edit', ['action' => 'edit', $subcategory->id], ['class' => 'link-dark']) ?>
                             <?= $this->Form->postLink('Delete', ['action' => 'delete', $subcategory->id], [
                                 'confirm' => __('Are you sure you want to delete {0}?', $subcategory->name),
-                                'class' => 'link-light'
+                                'class' => 'link-dark'
                             ]) ?>
                         </td>
                     </tr>
