@@ -12,7 +12,7 @@
         'style' => 'width:113px; height:113px;',
         'alt' => 'Piplup'
     ]) ?>
-    <h1 class="h3 mb-3 heading-title">Subcategories</h1>
+    <h1 class="h3 mb-3 heading-title">Categories</h1>
 </div>
 <div class="d-flex flex-column align-items-center">
     <!-- Place List Section -->
