@@ -28,8 +28,8 @@
             <!-- Right buttons -->
             <div class="col-auto d-flex flex-column gap-2">
                 <div class="d-flex gap-2">
+                    <!-- Filter Option -->
                     <div class="dropdown">
-                        <!-- Filter Option -->
                         <button class="pixel-button pink" type="button" id="filterDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                             Filter
                         </button>
@@ -37,6 +37,7 @@
                             <?= $this->Form->create(null, ['type' => 'get']) ?>
 
                             <div class="row">
+                                <!-- Categories Section -->
                                 <div class="col-6">
                                     <strong>Categories</strong>
                                     <?php foreach ($categories as $catId => $catName): ?>
@@ -52,19 +53,25 @@
                                     <?php endforeach; ?>
                                 </div>
 
+                                <!-- Subcategories Section -->
                                 <div class="col-6">
                                     <strong>Subcategories</strong>
-                                    <?php foreach ($subcategories as $subcat): ?>
-                                        <div class="form-check subcategory-item" data-category="<?= h($subcat->category_id) ?>">
-                                            <?= $this->Form->checkbox('subcategories[]', [
-                                                'value' => $subcat->id,
-                                                'id' => "subcategory-$subcat->id",
-                                                'checked' => in_array($subcat->id, (array) $this->request->getQuery('subcategories')),
-                                                'hiddenField' => false
-                                            ]) ?>
-                                            <?= $this->Form->label("subcategory-$subcat->id", h($subcat->name)) ?>
-                                        </div>
-                                    <?php endforeach; ?>
+                                    <div id="subcategory-list">
+                                        <?php foreach ($subcategories as $subcat): ?>
+                                            <div class="form-check subcategory-item" data-category="<?= h($subcat->category_id) ?>">
+                                                <?= $this->Form->checkbox('subcategories[]', [
+                                                    'value' => $subcat->id,
+                                                    'id' => "subcategory-$subcat->id",
+                                                    'checked' => in_array($subcat->id, (array) $this->request->getQuery('subcategories')),
+                                                    'hiddenField' => false
+                                                ]) ?>
+                                                <?= $this->Form->label("subcategory-$subcat->id", h($subcat->name)) ?>
+                                            </div>
+                                        <?php endforeach; ?>
+                                    </div>
+                                    <div id="subcategory-placeholder" style="display: none; font-style: italic; color: #666;">
+                                        Select categories first!
+                                    </div>
                                 </div>
                             </div>
 
@@ -75,6 +82,7 @@
                             <?= $this->Form->end() ?>
                         </div>
                     </div>
+
                     <!-- New Menu Option -->
                     <?= $this->Html->link('New', '/new-menu', ['class' => 'pixel-button orange']) ?>
                 </div>
@@ -137,29 +145,4 @@
     const allPlaces = <?= json_encode($allPlaces); ?>; // Pass places data to JavaScript
 </script>
 <?= $this->Html->script('https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js') ?>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const categoryCheckboxes = document.querySelectorAll('input[name="categories[]"]');
-    const subcategoryItems = document.querySelectorAll('.subcategory-item');
-
-    function updateSubcategories() {
-        let selectedCategories = Array.from(categoryCheckboxes)
-            .filter(cb => cb.checked)
-            .map(cb => cb.value);
-
-        subcategoryItems.forEach(item => {
-            if (selectedCategories.length === 0 || selectedCategories.includes(item.getAttribute('data-category'))) {
-                item.style.display = 'block';
-            } else {
-                item.style.display = 'none';
-            }
-        });
-    }
-
-    categoryCheckboxes.forEach(cb => {
-        cb.addEventListener('change', updateSubcategories);
-    });
-
-    updateSubcategories();
-});
-</script>
+<?= $this->Html->script('indexFilter') ?>
