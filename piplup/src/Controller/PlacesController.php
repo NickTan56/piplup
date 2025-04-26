@@ -38,8 +38,19 @@ class PlacesController extends AppController
                 'Categories__name',
             ]
         ]);
+
+        // Fetch all places with category, subcategory, name, address, and description for the map
+        $allPlaces = array_map(function ($place) {
+            return [
+                'name' => $place->name,
+                'address' => $place->address,
+                'description' => $place->description,
+                'subcategory' => $place->subcategory->name ?? '', // Ensure subcategory is fetched
+                'category' => $place->subcategory->category->name ?? '' // Ensure category is fetched
+            ];
+        }, $query->toArray()); // Use the same query to ensure consistency
     
-        $this->set(compact('places'));
+        $this->set(compact('places', 'allPlaces'));
     }    
 
     /**
