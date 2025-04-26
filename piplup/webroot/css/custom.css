@@ -129,3 +129,10 @@ html, body {
     outline: 2px solid #303030;
     box-shadow: inset -2px -2px 0 #fff, inset 2px 2px 0 #000;
 }
+
+@keyframes popupBounce {
+    0% { transform: scale(0.5); opacity: 0; }
+    60% { transform: scale(1.2); opacity: 1; }
+    80% { transform: scale(0.9); }
+    100% { transform: scale(1); }
+}

@@ -1,7 +1,6 @@
 window.initMap = initializeMap;
-// window.initializeAutocomplete = initializeAutocomplete;4
 
-let markers = []; // To store all markers with info windows by index
+let markers = [];
 let activeInfoWindow = null;
 
 function initializeMap() {
@@ -41,10 +40,25 @@ function initializeMap() {
 
                         const infoWindow = new google.maps.InfoWindow({
                             content: `
-                                <strong>Category:</strong> ${place.category}<br>
-                                <strong>Subcategory:</strong> ${place.subcategory}<br>
-                                <strong>Name:</strong> ${place.name}<br>
-                                <strong>Description:</strong> ${place.description}
+                                <div style="
+                                    font-family: 'Pixelify Sans', sans-serif;
+                                    background: #ffffff;
+                                    padding: 14px;
+                                    border: 3px solid #303030;
+                                    border-radius: 5px;
+                                    font-size: 14px;
+                                    color: #303030;
+                                    max-width: 280px;
+                                    white-space: pre-line;
+                                ">
+                                    <div class="fw-bold">Category:</div>${place.category}
+
+                                    <div class="fw-bold">Subcategory:</div>${place.subcategory}
+
+                                    <div class="fw-bold">Name:</div>${place.name}
+
+                                    <div class="fw-bold">Description:</div>${place.description}
+                                </div>
                             `,
                         });
 
@@ -53,12 +67,9 @@ function initializeMap() {
                             infoWindow.open(map, marker);
                             activeInfoWindow = infoWindow;
                         });
-                        
 
-                        // Save both marker and its infoWindow
                         markers[index] = { marker, infoWindow, position };
 
-                        // Hook list row click if it exists
                         const row = document.querySelector(`tr[data-index="${index}"]`);
                         if (row) {
                             row.addEventListener("click", () => {
@@ -68,7 +79,7 @@ function initializeMap() {
                                 map.panBy(-200, 0);
                                 infoWindow.open(map, marker);
                                 activeInfoWindow = infoWindow;
-                            });                            
+                            });
                         }
                     } else {
                         console.error(`Geocode failed for: ${place.address} — ${status}`);
@@ -78,23 +89,3 @@ function initializeMap() {
         });
     }
 }
-
-// function initializeAutocomplete() {
-//     const input = document.getElementById('autocomplete');
-//     if (!input) {
-//         console.warn('No autocomplete input found on this page.');
-//         return;
-//     }
-
-//     const autocomplete = new google.maps.places.Autocomplete(input, {
-//         types: ['geocode'],
-//         componentRestrictions: { country: 'au' }
-//     });
-
-//     autocomplete.addListener('place_changed', function () {
-//         const place = autocomplete.getPlace();
-//         if (!place.geometry) {
-//             console.warn("Autocomplete's returned place has no geometry.");
-//         }
-//     });
-// }
