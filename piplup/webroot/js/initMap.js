@@ -1,5 +1,5 @@
-window.initializeMap = initializeMap;
-window.initializeAutocomplete = initializeAutocomplete;
+window.initMap = initializeMap;
+// window.initializeAutocomplete = initializeAutocomplete;4
 
 let markers = []; // To store all markers with info windows by index
 let activeInfoWindow = null;
@@ -79,22 +79,22 @@ function initializeMap() {
     }
 }
 
-function initializeAutocomplete() {
-    const input = document.getElementById('autocomplete');
-    if (!input) {
-        console.warn('No autocomplete input found on this page.');
-        return;
-    }
+// function initializeAutocomplete() {
+//     const input = document.getElementById('autocomplete');
+//     if (!input) {
+//         console.warn('No autocomplete input found on this page.');
+//         return;
+//     }
 
-    const autocomplete = new google.maps.places.Autocomplete(input, {
-        types: ['geocode'],
-        componentRestrictions: { country: 'au' }
-    });
+//     const autocomplete = new google.maps.places.Autocomplete(input, {
+//         types: ['geocode'],
+//         componentRestrictions: { country: 'au' }
+//     });
 
-    autocomplete.addListener('place_changed', function () {
-        const place = autocomplete.getPlace();
-        if (!place.geometry) {
-            console.warn("Autocomplete's returned place has no geometry.");
-        }
-    });
-}
+//     autocomplete.addListener('place_changed', function () {
+//         const place = autocomplete.getPlace();
+//         if (!place.geometry) {
+//             console.warn("Autocomplete's returned place has no geometry.");
+//         }
+//     });
+// }

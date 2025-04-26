@@ -27,22 +27,23 @@
             <?= $this->Form->control('category_id', [
                 'label' => false,
                 'options' => $categories,
-                'class' => 'form-control pixel-input mt-2 mb-4',
+                'class' => 'form-control pixel-input',
                 'required' => true,
                 'id' => 'category-id'
             ]) ?>
 
             <!-- Subcategory Name -->
-            <label for="subcategory-name" class="form-label">Subcategory Name <span class="required-asterisk">*</span></label>
+            <label for="subcategory-name" class="form-label mt-3">Subcategory Name <span class="required-asterisk">*</span></label>
             <?= $this->Form->control('name', [
                 'label' => false,
-                'class' => 'form-control pixel-input mt-2 mb-4',
+                'placeholder' => 'Enter the name',
+                'class' => 'form-control pixel-input',
                 'required' => true,
                 'id' => 'subcategory-name'
             ]) ?>
         </fieldset>
 
-        <div class="d-flex justify-content-end">
+        <div class="d-flex justify-content-end mt-3">
             <?= $this->Form->button('Submit') ?>
         </div>
         <?= $this->Form->end() ?>

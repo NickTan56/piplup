@@ -30,6 +30,7 @@
                 'value' => $categoryId,
                 'empty' => 'Select a category',
                 'class' => 'form-control pixel-input',
+                'error' => false,
                 'onchange' => 'this.form.submit()' // Re-submit the form when category changes
             ]) ?>
 
@@ -40,26 +41,36 @@
                 'options' => $subcategories,
                 'empty' => 'Choose a subcategory',
                 'class' => 'form-control pixel-input',
+                'error' => false
             ]) ?>
 
             <!-- Name -->
+            <label for="name" class="form-label mt-3">Name <span class="required-asterisk">*</span></label>
             <?= $this->Form->control('name', [
-                'label' => 'Place Name',
-                'class' => 'form-control pixel-input mt-3'
+                'label' => false,
+                'placeholder' => 'Enter the name',
+                'class' => 'form-control pixel-input',
+                'error' => false
             ]) ?>
 
             <!-- Address -->
+            <label for="address" class="form-label mt-3">Address <span class="required-asterisk">*</span></label>
             <?= $this->Form->control('address', [
-                'label' => 'Address',
+                'label' => false,
                 'id' => 'autocomplete',
+                'placeholder' => 'Enter the address',
                 'type' => 'text',
-                'class' => 'form-control pixel-input mt-3'
+                'class' => 'form-control pixel-input',
+                'error' => false
             ]) ?>
 
             <!-- Description -->
+            <label for="address" class="form-label mt-3">Description</label>
             <?= $this->Form->control('description', [
-                'label' => 'Description',
-                'class' => 'form-control pixel-input mt-3'
+                'label' => false,
+                'placeholder' => 'Enter the description',
+                'class' => 'form-control pixel-input',
+                'error' => false
             ]) ?>
         </fieldset>
 

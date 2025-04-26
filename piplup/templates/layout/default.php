@@ -32,7 +32,7 @@ $googleApiKey = $apiKeys['google_maps_api_key'];
 
     <!-- Scripts -->
     <?= $this->Html->script('initMap') ?> 
-    <?= $this->Html->script("https://maps.googleapis.com/maps/api/js?key={$googleApiKey}&libraries=places&callback=initMap", [
+    <?= $this->Html->script("https://maps.googleapis.com/maps/api/js?key={$googleApiKey}&libraries=places&callback=initializeMap", [
         'async' => true,
         'defer' => true
     ]) ?>

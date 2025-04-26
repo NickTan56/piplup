@@ -22,12 +22,13 @@
             <label for="name" class="form-label">Category Name <span class="required-asterisk">*</span></label>
             <?= $this->Form->control('name', [
                 'label' => false,
-                'class' => 'form-control pixel-input mt-2 mb-4',
+                'placeholder' => 'Enter the name',
+                'class' => 'form-control pixel-input',
                 'required' => true,
                 'id' => 'name',
             ]) ?>
         </fieldset>
-        <div class="d-flex justify-content-end">
+        <div class="d-flex justify-content-end mt-3">
             <?= $this->Form->button('Submit') ?>
         </div>
         <?= $this->Form->end() ?>
