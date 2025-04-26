@@ -19,7 +19,7 @@
 
 <!-- Form Container -->
 <div class="row">
-    <div class="places form content form-wrapper" style="max-height: 400px; overflow-y: auto; padding-right: 10px;">
+    <div class="places form content form-wrapper" style="max-height: 600px; overflow-y: auto; padding-right: 10px;">
         <?= $this->Form->create($place) ?>
         <fieldset>
             <!-- Category Dropdown -->
