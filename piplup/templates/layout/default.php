@@ -3,6 +3,8 @@
  * @var \App\View\AppView $this
  */
 $cakeDescription = 'Piplup Places';
+$apiKeys = include CONFIG . 'api_keys.php'; // Load API keys from the configuration file
+$googleApiKey = $apiKeys['google_maps_api_key'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,21 +24,17 @@ $cakeDescription = 'Piplup Places';
 </head>
 <body class="pixelify-sans">
     <div class="map-container">
-    <div id="map"></div>
+        <div id="map"></div>
         <div class="overlay-panel m-5">
             <?= $this->fetch('content') ?>
-            <?= $this->Html->script('initMap') ?>
         </div>
     </div>
-    <?php
-    $apiKeys = include CONFIG . 'api_keys.php'; // Load API keys from the configuration file
-    $googleApiKey = $apiKeys['google_maps_api_key'];
-    ?>
-    <?= $this->Html->script("https://maps.googleapis.com/maps/api/js?key={$googleApiKey}&callback=initMap", [
+
+    <!-- Scripts -->
+    <?= $this->Html->script('initMap') ?> 
+    <?= $this->Html->script("https://maps.googleapis.com/maps/api/js?key={$googleApiKey}&libraries=places&callback=initMap", [
         'async' => true,
         'defer' => true
     ]) ?>
 </body>
 </html>
-<?= $this->Html->script("https://maps.googleapis.com/maps/api/js?key={$googleApiKey}&libraries=places") ?>
-<?= $this->Html->script('initAutocomplete') ?>
