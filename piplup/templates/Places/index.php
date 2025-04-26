@@ -108,7 +108,7 @@
     </div>
 
     <!-- Place List Section -->
-    <div class="info-panel border border-dark p-3 text-dark">
+    <div class="info-panel border border-dark p-3 text-dark table-wrapper" style="max-height: 400px; overflow-y: auto;">
         <table class="place-list table table-borderless">
             <thead class="fw-bold border-bottom pb-2 mb-2">
                 <tr>
