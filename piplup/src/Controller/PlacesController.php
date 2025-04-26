@@ -18,39 +18,62 @@ class PlacesController extends AppController
     public function index()
     {
         $query = $this->Places->find()
-            ->select([
-                'Places.id',
-                'Places.name',
-                'Places.address',
-                'Places.description',
-                'Subcategories__name' => 'Subcategories.name',
-                'Categories__name' => 'Categories.name',
-            ])
             ->contain(['Subcategories' => ['Categories']])
             ->leftJoinWith('Subcategories')
             ->leftJoinWith('Subcategories.Categories')
-            ->enableAutoFields(true); // Keep all original fields
+            ->enableAutoFields(true);
+    
+        // Handle search filter from GET
+        $search = $this->request->getQuery('search');
+        if (!empty($search)) {
+            $query->where([
+                'OR' => [
+                    'Places.name LIKE' => '%' . $search . '%',
+                    'Places.address LIKE' => '%' . $search . '%',
+                    'Places.description LIKE' => '%' . $search . '%',
+                ]
+            ]);
+        }
+    
+        // Handle filter by categories and subcategories
+        $categoryFilters = $this->request->getQuery('categories');
+        $subcategoryFilters = $this->request->getQuery('subcategories');
+    
+        if (!empty($categoryFilters)) {
+            $query->where(['Subcategories.category_id IN' => $categoryFilters]);
+        }
+    
+        if (!empty($subcategoryFilters)) {
+            $query->where(['Places.subcategory_id IN' => $subcategoryFilters]);
+        }
     
         $places = $this->paginate($query, [
             'sortableFields' => [
                 'Places.name',
-                'Subcategories__name',
-                'Categories__name',
-            ]
+                'Subcategories.name',
+                'Categories.name',
+            ],
         ]);
-
-        // Fetch all places with category, subcategory, name, address, and description for the map
-        $allPlaces = array_map(function ($place) {
-            return [
+    
+        // For the map
+        $allPlaces = [];
+        foreach ($places as $place) {
+            $allPlaces[] = [
                 'name' => $place->name,
                 'address' => $place->address,
                 'description' => $place->description,
-                'subcategory' => $place->subcategory->name ?? '', // Ensure subcategory is fetched
-                'category' => $place->subcategory->category->name ?? '' // Ensure category is fetched
+                'subcategory' => $place->subcategory->name ?? '',
+                'category' => $place->subcategory->category->name ?? '',
             ];
-        }, $query->toArray()); // Use the same query to ensure consistency
+        }
     
-        $this->set(compact('places', 'allPlaces'));
+        // Fetch for the filter box
+        $categories = $this->Places->Subcategories->Categories->find('list')->toArray();
+        $subcategories = $this->Places->Subcategories->find('all')
+            ->contain(['Categories'])
+            ->toArray();
+    
+        $this->set(compact('places', 'allPlaces', 'categories', 'subcategories'));
     }    
 
     /**

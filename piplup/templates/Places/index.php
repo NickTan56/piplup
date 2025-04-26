@@ -28,7 +28,52 @@
             <!-- Right buttons -->
             <div class="col-auto d-flex flex-column gap-2">
                 <div class="d-flex gap-2">
-                    <button type="button" class="pixel-button pink">Filter</button>
+                <div class="dropdown">
+                    <button class="pixel-button pink" type="button" id="filterDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                        Filter
+                    </button>
+                    <div class="dropdown-menu p-3" aria-labelledby="filterDropdown" style="width: 400px;">
+                        <?= $this->Form->create(null, ['type' => 'get']) ?>
+
+                        <div class="row">
+                            <div class="col-6">
+                                <strong>Categories</strong>
+                                <?php foreach ($categories as $catId => $catName): ?>
+                                    <div class="form-check">
+                                        <?= $this->Form->checkbox('categories[]', [
+                                            'value' => $catId,
+                                            'id' => "category-$catId",
+                                            'checked' => in_array($catId, (array) $this->request->getQuery('categories')),
+                                            'hiddenField' => false
+                                        ]) ?>
+                                        <?= $this->Form->label("category-$catId", h($catName)) ?>
+                                    </div>
+                                <?php endforeach; ?>
+                            </div>
+
+                            <div class="col-6">
+                                <strong>Subcategories</strong>
+                                <?php foreach ($subcategories as $subcat): ?>
+                                    <div class="form-check subcategory-item" data-category="<?= h($subcat->category_id) ?>">
+                                        <?= $this->Form->checkbox('subcategories[]', [
+                                            'value' => $subcat->id,
+                                            'id' => "subcategory-$subcat->id",
+                                            'checked' => in_array($subcat->id, (array) $this->request->getQuery('subcategories')),
+                                            'hiddenField' => false
+                                        ]) ?>
+                                        <?= $this->Form->label("subcategory-$subcat->id", h($subcat->name)) ?>
+                                    </div>
+                                <?php endforeach; ?>
+                            </div>
+                        </div>
+
+                        <div class="text-center mt-3">
+                            <?= $this->Form->button('Apply Filter', ['class' => 'pixel-button green']) ?>
+                        </div>
+
+                        <?= $this->Form->end() ?>
+                    </div>
+                </div>
                     <?= $this->Html->link('New', '/new-menu', ['class' => 'pixel-button orange']) ?>
                 </div>
                 <div class="d-flex gap-2">
@@ -88,3 +133,29 @@
     const allPlaces = <?= json_encode($allPlaces); ?>; // Pass places data to JavaScript
 </script>
 <?= $this->Html->script('https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js') ?>
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const categoryCheckboxes = document.querySelectorAll('input[name="categories[]"]');
+    const subcategoryItems = document.querySelectorAll('.subcategory-item');
+
+    function updateSubcategories() {
+        let selectedCategories = Array.from(categoryCheckboxes)
+            .filter(cb => cb.checked)
+            .map(cb => cb.value);
+
+        subcategoryItems.forEach(item => {
+            if (selectedCategories.length === 0 || selectedCategories.includes(item.getAttribute('data-category'))) {
+                item.style.display = 'block';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+    }
+
+    categoryCheckboxes.forEach(cb => {
+        cb.addEventListener('change', updateSubcategories);
+    });
+
+    updateSubcategories();
+});
+</script>
