@@ -38,46 +38,45 @@
                         </tbody></table></div></div>
                     <?php endif; ?>
 
-                    <!-- Accordion Item Start -->
-                    <div class="accordion-item" style="background: none; border: none;">
-                        <h2 class="accordion-header" id="heading<?= $rowIndex ?>">
-                            <button class="accordion-button custom-accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<?= $rowIndex ?>" aria-expanded="false" aria-controls="collapse<?= $rowIndex ?>">
-                                <?= h($categoryName) ?>
-                                <span class="custom-accordion-icon">▼</span>
-                            </button>
-                        </h2>
-                        <div id="collapse<?= $rowIndex ?>" class="accordion-collapse collapse" aria-labelledby="heading<?= $rowIndex ?>" data-bs-parent="#subcategoryAccordion">
-                            <div class="accordion-body p-0">
-                                <table class="place-list table table-borderless m-0">
-                                    <thead class="fw-bold border-bottom pb-2 mb-2">
-                                        <tr>
-                                            <th>Subcategory</th>
-                                            <th>Created</th>
-                                            <th>Modified</th>
-                                            <th>Actions</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                    <?php
-                    $currentCategory = $categoryName;
-                    $rowIndex++;
-                    endif;
-                    ?>
-                    <!-- Subcategory Rows -->
-                    <tr class="border-bottom py-2">
-                        <td><?= h($subcategory->name) ?></td>
-                        <td><?= h($subcategory->created->format('n/j/y, g:iA')) ?></td>
-                        <td><?= h($subcategory->modified->format('n/j/y, g:iA')) ?></td>
-                        <td>
-                            <?= $this->Html->link('Edit', ['action' => 'edit', $subcategory->id], ['class' => 'link-dark']) ?>
-                            <?= $this->Form->postLink('Delete', ['action' => 'delete', $subcategory->id], [
-                                'confirm' => __('Are you sure you want to delete {0}?', $subcategory->name),
-                                'class' => 'link-dark'
-                            ]) ?>
-                        </td>
-                    </tr>
+                <!-- Accordion Item Start -->
+                <div class="accordion-item" style="background: none; border: none;">
+                    <h2 class="accordion-header" id="heading<?= $rowIndex ?>">
+                        <button class="accordion-button custom-accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<?= $rowIndex ?>" aria-expanded="false" aria-controls="collapse<?= $rowIndex ?>">
+                            <?= h($categoryName) ?>
+                            <span class="custom-accordion-icon">▼</span>
+                        </button>
+                    </h2>
+                    <div id="collapse<?= $rowIndex ?>" class="accordion-collapse collapse" aria-labelledby="heading<?= $rowIndex ?>" data-bs-parent="#subcategoryAccordion">
+                        <div class="accordion-body p-0">
+                            <table class="place-list table table-borderless m-0">
+                                <thead class="fw-bold border-bottom pb-2 mb-2">
+                                    <tr>
+                                        <th>Subcategory</th>
+                                        <th>Created</th>
+                                        <th>Modified</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                <?php
+                $currentCategory = $categoryName;
+                $rowIndex++;
+                endif;
+                ?>
+                <!-- Subcategory Rows -->
+                <tr class="border-bottom py-2">
+                    <td><?= h($subcategory->name) ?></td>
+                    <td><?= h($subcategory->created->format('n/j/y, g:iA')) ?></td>
+                    <td><?= h($subcategory->modified->format('n/j/y, g:iA')) ?></td>
+                    <td>
+                        <?= $this->Html->link('Edit', ['action' => 'edit', $subcategory->id], ['class' => 'link-dark']) ?>
+                        <?= $this->Form->postLink('Delete', ['action' => 'delete', $subcategory->id], [
+                            'confirm' => __('Are you sure you want to delete {0}?', $subcategory->name),
+                            'class' => 'link-dark'
+                        ]) ?>
+                    </td>
+                </tr>
             <?php endforeach; ?>
-                </tbody></table></div></div></div>
         </div>
     </div>
 </div>
