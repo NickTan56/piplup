@@ -17,6 +17,7 @@ class PlacesController extends AppController
      */
     public function index()
     {
+        // Join table to include Categories and Subcategories
         $query = $this->Places->find()
             ->contain(['Subcategories' => ['Categories']])
             ->leftJoinWith('Subcategories')
@@ -72,6 +73,15 @@ class PlacesController extends AppController
         $subcategories = $this->Places->Subcategories->find('all')
             ->contain(['Categories'])
             ->toArray();
+
+        // Paginate query
+        $this->paginate = [
+            'contain' => ['Subcategories' => ['Categories']],
+            'sortWhitelist' => [
+                'Places.name', 'Places.address', 'Places.created', 
+                'Subcategories.name', 'Categories.name'
+            ],
+        ];
     
         $this->set(compact('places', 'allPlaces', 'categories', 'subcategories'));
     }    

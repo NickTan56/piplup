@@ -93,8 +93,8 @@
                             Sort
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="sortDropdown">
-                            <li><?= $this->Html->link('Category (A-Z)', ['?' => ['sort' => 'Categories__name', 'direction' => 'asc']], ['class' => 'dropdown-item']) ?></li>
-                            <li><?= $this->Html->link('Subcategory (A-Z)', ['?' => ['sort' => 'Subcategories__name', 'direction' => 'asc']], ['class' => 'dropdown-item']) ?></li>
+                            <li><?= $this->Html->link('Category (A-Z)', ['?' => ['sort' => 'Categories.name', 'direction' => 'asc']], ['class' => 'dropdown-item']) ?></li>
+                            <li><?= $this->Html->link('Subcategory (A-Z)', ['?' => ['sort' => 'Subcategories.name', 'direction' => 'asc']], ['class' => 'dropdown-item']) ?></li>
                             <li><?= $this->Html->link('Name (A-Z)', ['?' => ['sort' => 'Places.name', 'direction' => 'asc']], ['class' => 'dropdown-item']) ?></li>
                             <li><hr class="dropdown-divider"></li>
                             <li><?= $this->Html->link('Name (Z-A)', ['?' => ['sort' => 'Places.name', 'direction' => 'desc']], ['class' => 'dropdown-item']) ?></li>
