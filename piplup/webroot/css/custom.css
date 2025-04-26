@@ -186,3 +186,51 @@ html, body {
     box-shadow: none !important;
     outline: none !important;
 }
+
+/* Accordion Body Background */
+.accordion-body {
+    background-color: #f8f8f8; /* very light grey */
+    border-top: 1px solid #dcdcdc;
+}
+
+/* Subcategory table inside accordion */
+.accordion-body .table {
+    font-size: 14px;
+    color: #505050;
+    background-color: #f8f8f8; /* match the body */
+    margin-bottom: 0;
+}
+
+/* Subcategory table headers */
+.accordion-body .table thead th {
+    font-size: 14px;
+    color: #303030;
+    font-weight: bold;
+    background-color: #f0f0f0 !important; /* slightly darker for headers */
+}
+
+/* Subcategory table cells */
+.accordion-body .table tbody td {
+    font-size: 13.5px;
+    color: #505050;
+    vertical-align: middle;
+    background-color: #f8f8f8;
+}
+
+/* Subcategory table links */
+.accordion-body .table a.link-light {
+    color: #0040C0;
+    font-weight: normal;
+    text-decoration: underline;
+    font-size: 13px;
+}
+
+/* Light line between rows */
+.accordion-body .table tbody tr {
+    border-bottom: 1px solid #e0e0e0;
+}
+
+/* Optional: hover effect on subcategory rows */
+.accordion-body .table tbody tr:hover {
+    background-color: #f0f0f0;
+}
