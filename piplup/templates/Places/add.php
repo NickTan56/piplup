@@ -19,7 +19,7 @@
 
 <!-- Form Container -->
 <div class="row">
-    <div class="places form content">
+    <div class="places form content form-wrapper" style="max-height: 400px; overflow-y: auto; padding-right: 10px;">
         <?= $this->Form->create($place) ?>
         <fieldset>
             <!-- Category Dropdown -->
@@ -52,6 +52,7 @@
             <?= $this->Form->control('address', [
                 'label' => 'Address',
                 'id' => 'autocomplete',
+                'type' => 'text',
                 'class' => 'form-control pixel-input mt-3'
             ]) ?>
 
