@@ -73,15 +73,6 @@ class PlacesController extends AppController
         $subcategories = $this->Places->Subcategories->find('all')
             ->contain(['Categories'])
             ->toArray();
-
-        // Paginate query
-        $this->paginate = [
-            'contain' => ['Subcategories' => ['Categories']],
-            'sortWhitelist' => [
-                'Places.name', 'Places.address', 'Places.created', 
-                'Subcategories.name', 'Categories.name'
-            ],
-        ];
     
         $this->set(compact('places', 'allPlaces', 'categories', 'subcategories'));
     }    
