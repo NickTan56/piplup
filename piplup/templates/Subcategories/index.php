@@ -4,54 +4,80 @@
  * @var iterable<\App\Model\Entity\Subcategory> $subcategories
  */
 ?>
-<div class="subcategories index content">
-    <?= $this->Html->link(__('New Subcategory'), ['action' => 'add'], ['class' => 'button float-right']) ?>
-    <h3><?= __('Subcategories') ?></h3>
-    <div class="table-responsive">
-        <table>
-            <thead>
-                <tr>
-                    <th><?= $this->Paginator->sort('id') ?></th>
-                    <th><?= $this->Paginator->sort('category_id') ?></th>
-                    <th><?= $this->Paginator->sort('name') ?></th>
-                    <th><?= $this->Paginator->sort('created') ?></th>
-                    <th><?= $this->Paginator->sort('modified') ?></th>
-                    <th class="actions"><?= __('Actions') ?></th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($subcategories as $subcategory): ?>
-                <tr>
-                    <td><?= $this->Number->format($subcategory->id) ?></td>
-                    <td><?= $subcategory->hasValue('category') ? $this->Html->link($subcategory->category->name, ['controller' => 'Categories', 'action' => 'view', $subcategory->category->id]) : '' ?></td>
-                    <td><?= h($subcategory->name) ?></td>
-                    <td><?= h($subcategory->created) ?></td>
-                    <td><?= h($subcategory->modified) ?></td>
-                    <td class="actions">
-                        <?= $this->Html->link(__('View'), ['action' => 'view', $subcategory->id]) ?>
-                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $subcategory->id]) ?>
-                        <?= $this->Form->postLink(
-                            __('Delete'),
-                            ['action' => 'delete', $subcategory->id],
-                            [
-                                'method' => 'delete',
-                                'confirm' => __('Are you sure you want to delete # {0}?', $subcategory->id),
-                            ]
-                        ) ?>
-                    </td>
-                </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
+<!-- Piplup Header -->
+<div class="d-flex flex-wrap justify-content-start align-items-center">
+    <?= $this->Html->image('piplup.png', [
+        'class' => 'mb-3',
+        'style' => 'width:113px; height:113px;',
+        'alt' => 'Piplup'
+    ]) ?>
+    <h1 class="h3 mb-3 heading-title">Subcategories</h1>
+</div>
+
+<div class="d-flex flex-column align-items-center">
+    <!-- Top Action Buttons -->
+    <div class="d-flex flex-wrap justify-content-center align-items-start gap-4 mb-4">
+        <div class="d-flex gap-2">
+            <?= $this->Html->link('New', ['action' => 'add'], ['class' => 'pixel-button orange']) ?>
+            <?= $this->Html->link('Back', ['controller' => 'Places', 'action' => 'index'], ['class' => 'pixel-button blue']) ?>
+        </div>
     </div>
-    <div class="paginator">
-        <ul class="pagination">
-            <?= $this->Paginator->first('<< ' . __('first')) ?>
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-            <?= $this->Paginator->last(__('last') . ' >>') ?>
-        </ul>
-        <p><?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?></p>
+
+    <!-- Subcategory List Section -->
+    <div class="info-panel border border-dark p-3 text-dark table-wrapper" style="max-height: 500px; overflow-y: auto; width:100%;">
+        <div class="accordion" id="subcategoryAccordion">
+            <?php
+            $currentCategory = null;
+            $rowIndex = 0;
+            foreach ($subcategories as $subcategory):
+                $categoryName = $subcategory->category->name ?? 'Uncategorized';
+                if ($categoryName !== $currentCategory):
+                    if ($currentCategory !== null): ?>
+                        </tbody></table></div></div>
+                    <?php endif; ?>
+
+                    <!-- Accordion Item Start -->
+                    <div class="accordion-item" style="background: none; border: none;">
+                        <h2 class="accordion-header" id="heading<?= $rowIndex ?>">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse<?= $rowIndex ?>" aria-expanded="false" aria-controls="collapse<?= $rowIndex ?>" style="font-family: 'Pixelify Sans'; font-size: 20px;">
+                                <?= h($categoryName) ?>
+                            </button>
+                        </h2>
+                        <div id="collapse<?= $rowIndex ?>" class="accordion-collapse collapse" aria-labelledby="heading<?= $rowIndex ?>" data-bs-parent="#subcategoryAccordion">
+                            <div class="accordion-body p-0">
+                                <table class="place-list table table-borderless m-0">
+                                    <thead class="fw-bold border-bottom pb-2 mb-2">
+                                        <tr>
+                                            <th>Subcategory</th>
+                                            <th>Created</th>
+                                            <th>Modified</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                    <?php
+                    $currentCategory = $categoryName;
+                    $rowIndex++;
+                    endif;
+                    ?>
+                    <!-- Subcategory Rows -->
+                    <tr>
+                        <td><?= h($subcategory->name) ?></td>
+                        <td><?= h($subcategory->created->format('n/j/y, g:iA')) ?></td>
+                        <td><?= h($subcategory->modified->format('n/j/y, g:iA')) ?></td>
+                        <td>
+                            <?= $this->Html->link('Edit', ['action' => 'edit', $subcategory->id], ['class' => 'link-light']) ?>
+                            <?= $this->Form->postLink('Delete', ['action' => 'delete', $subcategory->id], [
+                                'confirm' => __('Are you sure you want to delete {0}?', $subcategory->name),
+                                'class' => 'link-light'
+                            ]) ?>
+                        </td>
+                    </tr>
+            <?php endforeach; ?>
+                </tbody></table></div></div></div>
+        </div>
     </div>
 </div>
+
+<!-- Bootstrap Bundle -->
+<?= $this->Html->script('https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js') ?>
