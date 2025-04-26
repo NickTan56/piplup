@@ -125,15 +125,18 @@
                         <td><?= h($place->subcategory->name ?? '') ?></td>
                         <td><?= h($place->name) ?></td>
                         <td>
-                            <a href="https://www.google.com/maps/dir/?api=1&destination=<?= urlencode($place->address) ?>" target="_blank" rel="noopener">
-                                <?= $this->Html->link('<i class="bi bi-sign-turn-right-fill"></i>', 
-                                    "https://www.google.com/maps/dir/?api=1&destination=" . urlencode($place->address), [
-                                    'escape' => false,
-                                    'target' => '_blank',
-                                    'rel' => 'noopener',
-                                    'title' => 'Open in Google Maps'
-                                ]) ?>
-                            </a>
+                            <div class="d-flex flex-column align-items-center">
+                                <a href="https://www.google.com/maps/dir/?api=1&destination=<?= urlencode($place->address) ?>" target="_blank" rel="noopener">
+                                    <?= $this->Html->link('<i class="bi bi-sign-turn-right-fill"></i>', 
+                                        "https://www.google.com/maps/dir/?api=1&destination=" . urlencode($place->address), [
+                                        'escape' => false,
+                                        'target' => '_blank',
+                                        'rel' => 'noopener',
+                                        'title' => 'Open in Google Maps',
+                                        'class' => 'justify-content-center'
+                                    ]) ?>
+                                </a>
+                            </div>
                         </td>
                     </tr>
                 <?php endforeach; ?>
