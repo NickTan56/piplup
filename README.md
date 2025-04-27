@@ -1,7 +1,7 @@
 # Piplup Places
+![Piplup Screenshot](documentation/piplup1.png)
 
-Piplup Places is a pixel-themed web application for managing locations around Melbourne (or any other city).  
-The system is built using CakePHP, Bootstrap, and Google Maps API, offering a clean, structured platform for storing, filtering, and displaying categorized places on an interactive map.
+Piplup Places is a pixel-themed web application for managing locations around Melbourne (or any other city). The system is built using CakePHP, Bootstrap, and Google Maps API.
 
 ---
 
