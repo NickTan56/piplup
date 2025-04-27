@@ -88,16 +88,44 @@
                 </div>
                 <div class="d-flex gap-2">
                     <!-- Sort Option -->
+                    <?php
+                    // Capture the current filter queries so they don't disappear after sorting
+                    $currentQuery = $this->request->getQuery();
+                    ?>
                     <div class="dropdown">
                         <button class="pixel-button green" type="button" id="sortDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                             Sort
                         </button>
                         <ul class="dropdown-menu" aria-labelledby="sortDropdown">
-                            <li><?= $this->Html->link('Category (A-Z)', ['?' => ['sort' => 'Categories.name', 'direction' => 'asc']], ['class' => 'dropdown-item']) ?></li>
-                            <li><?= $this->Html->link('Subcategory (A-Z)', ['?' => ['sort' => 'Subcategories.name', 'direction' => 'asc']], ['class' => 'dropdown-item']) ?></li>
-                            <li><?= $this->Html->link('Name (A-Z)', ['?' => ['sort' => 'Places.name', 'direction' => 'asc']], ['class' => 'dropdown-item']) ?></li>
+                            <li>
+                                <?= $this->Html->link(
+                                    'Category (A-Z)', 
+                                    ['?' => array_merge($currentQuery, ['sort' => 'Categories.name', 'direction' => 'asc'])], 
+                                    ['class' => 'dropdown-item']
+                                ) ?>
+                            </li>
+                            <li>
+                                <?= $this->Html->link(
+                                    'Subcategory (A-Z)', 
+                                    ['?' => array_merge($currentQuery, ['sort' => 'Subcategories.name', 'direction' => 'asc'])], 
+                                    ['class' => 'dropdown-item']
+                                ) ?>
+                            </li>
+                            <li>
+                                <?= $this->Html->link(
+                                    'Name (A-Z)', 
+                                    ['?' => array_merge($currentQuery, ['sort' => 'Places.name', 'direction' => 'asc'])], 
+                                    ['class' => 'dropdown-item']
+                                ) ?>
+                            </li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><?= $this->Html->link('Name (Z-A)', ['?' => ['sort' => 'Places.name', 'direction' => 'desc']], ['class' => 'dropdown-item']) ?></li>
+                            <li>
+                                <?= $this->Html->link(
+                                    'Name (Z-A)', 
+                                    ['?' => array_merge($currentQuery, ['sort' => 'Places.name', 'direction' => 'desc'])], 
+                                    ['class' => 'dropdown-item']
+                                ) ?>
+                            </li>
                         </ul>
                     </div>
                     <!-- List Menu Option -->
